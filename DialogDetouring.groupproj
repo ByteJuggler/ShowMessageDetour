@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{1EAA46E9-1B19-4A3E-A673-EE4C2B0F8108}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ShowMessageNoDetour.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ShowMessageWithDetour.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ShowMessageNoDetour">
+        <MSBuild Projects="ShowMessageNoDetour.dproj"/>
+    </Target>
+    <Target Name="ShowMessageNoDetour:Clean">
+        <MSBuild Projects="ShowMessageNoDetour.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ShowMessageNoDetour:Make">
+        <MSBuild Projects="ShowMessageNoDetour.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ShowMessageWithDetour">
+        <MSBuild Projects="ShowMessageWithDetour.dproj"/>
+    </Target>
+    <Target Name="ShowMessageWithDetour:Clean">
+        <MSBuild Projects="ShowMessageWithDetour.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ShowMessageWithDetour:Make">
+        <MSBuild Projects="ShowMessageWithDetour.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ShowMessageNoDetour;ShowMessageWithDetour"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ShowMessageNoDetour:Clean;ShowMessageWithDetour:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ShowMessageNoDetour:Make;ShowMessageWithDetour:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
